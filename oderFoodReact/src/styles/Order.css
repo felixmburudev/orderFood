@@ -1,0 +1,19 @@
+.order-container{
+    position: relative;
+    top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.food-order-container{
+    display: flex;
+    align-items: center;
+}
+
+@media(max-width: 768px) {
+    .food-order-container{
+        flex-direction: column;
+    }
+    
+}

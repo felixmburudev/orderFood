@@ -1,0 +1,17 @@
+.cart-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.priceTotal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.priceTotal button{
+    color: black;
+    font-weight: bold;
+    background-color: aquamarine;
+    border-radius: 5px;
+}
