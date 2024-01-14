@@ -2,11 +2,15 @@ const express = require('express')
 const mysql = require('mysql2')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const cookieParser = require('cookie-parser');
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:5173', 
+  }));
 app.use(bodyParser.json())
+app.use(cookieParser());
 
 const db = mysql.createConnection({
     host:"localhost",
@@ -21,6 +25,59 @@ db.connect((error)=>{
     else{
     console.log('connected to database')}
 })
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Origin', 'http://localhost:5173'); 
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+  });
+
+app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+    console.log("ll")
+    db.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], (err, results) => {
+      if (err) {
+        console.error('MySQL error:', err);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+  
+      if (results.length === 0) {
+        return res.status(401).json({ message: 'Invalid credentials' });
+      }
+  
+      // Set a cookie 
+      res.cookie('authCookie', 'authenticated', { httpOnly: true });
+      res.status(200).json({ message: 'Login successful' });
+    });
+  });
+
+  app.post('/signup', (req, res) => {
+    const { name, email, password, phone } = req.body;
+  
+    // Check if exist
+    db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
+      if (err) {
+        console.error('MySQL error:', err);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+  
+      if (results.length > 0) {
+        return res.status(409).json({ message: 'Email already exists' });
+      }
+  
+      // Insert a new user
+      db.query('INSERT INTO users (name, email, password, phone) VALUES (?, ?, ?,?)', [name, email, password, phone], (err) => {
+        if (err) {
+          console.error('MySQL error:', err);
+          return res.status(500).json({ message: 'Internal server error' });
+        }
+  
+        res.status(201).json({ message: 'User created successfully' });
+      });
+    });
+  });
 
 app.post('/items', (req, res)=>{
     const queryItems ='SELECT * FROM food'
