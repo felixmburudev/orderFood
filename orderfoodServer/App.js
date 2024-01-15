@@ -8,6 +8,7 @@ const app = express()
 
 app.use(cors({
     origin: 'http://localhost:5173', 
+    credentials: true,
   }));
 app.use(bodyParser.json())
 app.use(cookieParser());
@@ -34,9 +35,23 @@ app.use((req, res, next) => {
     next();
   });
 
+
+  // Middleware to check authe
+const checkAuth = (req, res, next) => {
+  const authCookie = req.cookies.authCookie;
+
+  if (!authCookie) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+  const userEmail = authCookie;
+  console.log("email " + userEmail )
+req.user = { userEmail };
+
+  next();
+};
+
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
-    console.log("ll")
     db.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], (err, results) => {
       if (err) {
         console.error('MySQL error:', err);
@@ -48,8 +63,9 @@ app.post('/login', (req, res) => {
       }
   
       // Set a cookie 
-      res.cookie('authCookie', 'authenticated', { httpOnly: true });
-      res.status(200).json({ message: 'Login successful' });
+      const userEmail = results[0].email;
+    res.cookie('authCookie', userEmail, { httpOnly: true });
+    res.status(200).json({ message: 'Login successful' });
     });
   });
 
@@ -173,6 +189,24 @@ app.post('/image', (req, res) => {
     });
   });
   
+  app.get('/user-profile', checkAuth, (req, res) => {
+    const userEmail = req.user.userEmail;
+    db.query('SELECT * FROM users WHERE email = ?', [userEmail], (err, results) => {
+      if (err) {
+        console.error('Error querying database:', err);
+        return res.status(500).json({ message: 'Internal Server Error' });
+      }
+  
+      if (results.length === 0) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      const user = results[0];
+      res.json({ user });
+    });
+  });
+
+
 
 app.listen(3000, () =>{
     console.log('app running')

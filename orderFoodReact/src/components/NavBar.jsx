@@ -52,13 +52,7 @@ function NavBar(){
                 smooth={true}
                 offset={-80}
                 duration={700} onClick={showNavbar}>Contact Us</Link>
-                <Link 
-                activeClass="active"
-                to="Login"
-                spy={true}
-                smooth={true}
-                offset={-80}
-                duration={700} onClick={showNavbar}><FiUser/></Link>
+                <a href="/Login" onClick={showNavbar}><FiUser/></a>
                 <button className="nav-btn nav-close-btn" onClick={showNavbar}>
                     <FaTimes/>
                 </button>

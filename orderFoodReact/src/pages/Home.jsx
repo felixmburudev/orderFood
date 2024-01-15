@@ -22,7 +22,7 @@ function Home() {
   }, [slides.length]);
 
   return (
-    <div className="main-container" style={{ backgroundImage: slides[currentSlide] }}>
+    <div id="Home" className="main-container" style={{ backgroundImage: slides[currentSlide] }}>
       <div className="centered-text">
         <h1>BETTER COOK ONLINE FOOD</h1>
         <p>Discover amazing fast food prepared my our well trained Cheifs!</p>

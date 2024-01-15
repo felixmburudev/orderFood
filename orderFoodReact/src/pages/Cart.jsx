@@ -11,7 +11,7 @@ const Cart = () => {
     setTotalPrice(calculatePrice)
   },[cartItems])
   return (
-    <div  className="cart-container">
+    <div id="Cart" className="cart-container">
       <h2>Cart {cartItems.length}</h2>
       <ul>
         {cartItems.map((item) => (

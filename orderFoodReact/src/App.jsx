@@ -7,6 +7,7 @@ import MainPage from './pages/MainPage'
 import NavBar from './components/NavBar'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
+import UserProfile from './pages/UserProfile'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/login' element={<Login/>} />
+      <Route path='/Profile' element={<UserProfile/>} />
     </Routes>
     </BrowserRouter>
     </>

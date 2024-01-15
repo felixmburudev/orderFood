@@ -15,8 +15,8 @@ const Login = () => {
       const response = await axios.post('http://localhost:3000/login', {
         email,
         password,
-      }, {
-        withCredentials: true, 
+      },{
+        withCredentials: true
       });
       console.log(response.data); 
       setEmail('');
@@ -30,7 +30,7 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
+    <div id="Login" className="login-container">
       <h2>Login</h2>
       {error && <div className="error">{error}</div>}
       <input
