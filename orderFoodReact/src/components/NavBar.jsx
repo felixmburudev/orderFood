@@ -10,15 +10,26 @@ import { useCart } from '../context/StoreContext'
 function NavBar(){
   const navigate = useNavigate()
     const{cartItems}= useCart()
-  const handleNavigate = ()=>{
-    navigate('/cart')
-  }
 
     const navRef = useRef(null);
      const showNavbar = () =>{
         navRef.current.classList.toggle("responsive-nav");
      }
-//closing the navbar
+const openCart = ()=>{
+  const cookieName = "authCookie"
+  const cookies = document.cookie.split('; ');
+  for (const cookie of cookies) {
+    const [name] = cookie.split('=');
+    if (name === cookieName) {
+      navigate('/cart')
+    }
+    else{
+      navigate("/Profile")
+    }
+  }    
+
+ 
+}
 
     return (
       <>
@@ -40,11 +51,11 @@ function NavBar(){
                 duration={ 500}onClick={showNavbar}>Menu</Link>
                 <Link 
                 activeClass="active"
-                to=""
+                to="/About"
                 spy={true}
                 smooth={true}
                 offset={-80}
-                duration={ 500} onClick={showNavbar}>Services</Link>
+                duration={ 500} onClick={showNavbar}>About</Link>
                 <Link 
                 activeClass="active"
                 to="Contact"
@@ -52,14 +63,14 @@ function NavBar(){
                 smooth={true}
                 offset={-80}
                 duration={700} onClick={showNavbar}>Contact Us</Link>
-                <a href="/Login" onClick={showNavbar}><FiUser/></a>
+               <a href="/Profile" onClick={showNavbar}><FiUser/></a>
                 <button className="nav-btn nav-close-btn" onClick={showNavbar}>
                     <FaTimes/>
                 </button>
                 </nav>
 		
 		<div className="navbtn">
-      <a href="/Cart" onClick={handleNavigate}>{<FiShoppingCart/> } {cartItems.length }</a>
+      <a  onClick={openCart}>{<FiShoppingCart/> } {cartItems.length }</a>
         </div>
                 
                 <button className="nav-btn" onClick={showNavbar}>
@@ -72,34 +83,3 @@ function NavBar(){
 }
 export default NavBar;
 
-
-
-// import '../styles/navbar.css'
-// import {FiShoppingCart, FiUser} from 'react-icons/fi'
-// import { useNavigate } from 'react-router-dom' 
-// import { useCart } from '../context/StoreContext'
-
-// function NavBar() {    
-//   const navigate = useNavigate()
-//     const{cartItems}= useCart()
-//   const handleNavigate = ()=>{
-//     navigate('/cart')
-//   }
-//   return (
-//     <div className='navbar-container'>
-//       <h2>burger shop</h2>
-//         <div className="main">
-//             <ul>
-//                 <li><a href="/">Home</a></li>
-//                 <li><a href="/menu">Menu</a></li>
-//                 <li><a href="/">About</a></li>
-//             </ul>
-//         </div>
-//         <div className="navbtn">
-//       <div onClick={handleNavigate}>{<FiShoppingCart/> } {cartItems.length }</div>
-//           <a href='/login'>{<FiUser/>}</a>
-//         </div></div>
-//   )
-// }
-
-// export default NavBar

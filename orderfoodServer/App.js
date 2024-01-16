@@ -41,14 +41,18 @@ const checkAuth = (req, res, next) => {
   const authCookie = req.cookies.authCookie;
 
   if (!authCookie) {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: "access denaid" });
   }
   const userEmail = authCookie;
-  console.log("email " + userEmail )
-req.user = { userEmail };
+  req.user = { userEmail };
 
   next();
 };
+
+app.get('/check-auth', (req, res) => {
+  const isAuthenticated = req.cookies.authCookie === 'authenticated';
+  res.json({ authenticated: isAuthenticated });
+});
 
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
@@ -64,7 +68,7 @@ app.post('/login', (req, res) => {
   
       // Set a cookie 
       const userEmail = results[0].email;
-    res.cookie('authCookie', userEmail, { httpOnly: true });
+    res.cookie('authCookie', userEmail, );
     res.status(200).json({ message: 'Login successful' });
     });
   });
@@ -114,11 +118,10 @@ app.post('/items', (req, res)=>{
         }
     })
 })
-app.get('/cart/user',(req, res)=>{
-    const user_id =1
-    console.log('server called bt usercart')
-    const query ='SELECT * FROM cart WHERE user_id = ?'
-    db.query(query, user_id, (error, results)=>{
+app.get('/cart/user', checkAuth ,(req, res)=>{
+  const userEmail = req.user.userEmail;
+    const query ='SELECT * FROM cart WHERE email = ?'
+    db.query(query, userEmail, (error, results)=>{
         if(error){
             console.log("error retriving cartitems "+ error)
         } else{
@@ -128,40 +131,39 @@ app.get('/cart/user',(req, res)=>{
     // res.status(200).json(items)
 })
 
-app.post('/cart/add', (req, res)=>{
+app.post('/cart/add', checkAuth, (req, res)=>{  
+    const userEmail = req.user.userEmail;
     const {name, item_id, price }= req.body
-    const user_id =1
-    const cart_id = `${user_id}`+`${item_id}`
-    const quantity =1
-    console.log("this items came " + name +item_id+quantity+price)
-    const query = "INSERT INTO cart (user_id, cart_id, item_id, name, price,quantity) VALUES(?,?,?,?,?,?)"
-    db.query(query, [user_id, cart_id, item_id, name,price,quantity], (error, results)=>{
+    const quantity = 1
+    const cart_id = `${userEmail}`+`${item_id}`
+    const query = "INSERT INTO cart (email, cart_id, item_id, name, price,quantity) VALUES(?,?,?,?,?,?)"
+    db.query(query, [userEmail, cart_id, item_id, name,price,quantity], (error, results)=>{
         if(error){console.log("the cart insertion failed due to " + error)}
         else{
             console.log("cart insertion success")
+            res.status(200)
         }
     })
-    res.status(200)
 })
-app.put('/cart/update',(req, res)=>{
+app.put('/cart/update', checkAuth, (req, res)=>{
+    const userEmail = req.user.userEmail;
     const {item_id, updatedQuantity} = req.body
-    console.log(item_id + " ss " + updatedQuantity)
-    const query ='UPDATE cart SET quantity = ? WHERE user_id =? AND item_id = ?'
-    db.query(query,[updatedQuantity, 1, item_id],(error, results)=>{
+    const query ='UPDATE cart SET quantity = ? WHERE email =? AND item_id = ?'
+    db.query(query,[updatedQuantity, userEmail, item_id],(error, results)=>{
         if(error){
             console.log('error while updating, ' + error)
         }
         else{
             console.log('item updated')
+            res.status(200)
         }
     })
-    res.status(200)
 })
-app.put('/cart/delete', (req, res)=>{
+app.put('/cart/delete', checkAuth, (req, res)=>{
+    const userEmail = req.user.userEmail;
     const {item_id} = req.body
-    console.log("deliting " + item_id)
-    const deletQuery = 'DELETE FROM cart WHERE item_id = ?'
-    db.query(deletQuery, [item_id],(error, results)=>{
+    const deletQuery = 'DELETE FROM cart WHERE item_id = ? AND email = ?'
+    db.query(deletQuery, [item_id, userEmail],(error, results)=>{
         if(error){console.log('error while deleting '+ error)}
         else{console.log("item deleted")}
     })
@@ -171,16 +173,13 @@ app.put('/cart/delete', (req, res)=>{
 app.post('/image', (req, res) => {
     // const item_id = req.params.imgId
     const{item}=req.body
-    console.log(item.item_id+"  is thenimahewiefdf")
     db.query('SELECT image FROM food WHERE item_id = ?', [item.item_id], (error, results) => {
       if (error) {
         console.error(error);
         res.status(500).send('Error fetching image');
       } else {
         if (results.length > 0) {
-            console.log('image foud sucker')
           const imageBuffer = `data:img/jpeg;base64,${results[0].image.toString('base64')}`; // Get the BLOB data
-          console.log(imageBuffer)
           res.end(imageBuffer);
         } else {
           res.status(404).send('Image not found');
@@ -206,6 +205,13 @@ app.post('/image', (req, res) => {
     });
   });
 
+ 
+app.post('/logout', (req, res) => {
+  // Clear auth cookie
+  res.clearCookie('authCookie', { httpOnly: true });
+console.log("Logout successful")
+  res.json({ message: 'Logout successful' });
+});
 
 
 app.listen(3000, () =>{

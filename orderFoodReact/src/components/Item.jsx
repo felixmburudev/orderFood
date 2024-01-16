@@ -1,12 +1,20 @@
-import {useEffect, useState} from 'react'
 import { useCart } from "../context/StoreContext";
 import '../styles/food.css'
+import { useNavigate } from 'react-router-dom';
 
-const Item = ({itemData}) => {
+const Item = ({itemData, isAuth}) => {
     const { addToCart, cartItems } = useCart();
-    const[inCart, setInCart]=useState()
+    const navigate =useNavigate()
     
     const {image, ...itemToCart} = itemData
+    const addItemToCart = ()=>{
+        if (isAuth) {
+           addToCart(itemToCart)
+        }
+        else{
+          navigate("/Profile")
+        }
+      }    
     
   return (
     <div className="food-containerr">
@@ -20,29 +28,10 @@ const Item = ({itemData}) => {
             <p className="price"> {itemData.price} Ksh</p>
           </div>
             <p className='about'> {itemData.item_description}</p>
-            <button onClick={()=>addToCart(itemToCart)}>Order Food</button>
+            <button onClick={addItemToCart}>Order Food</button>
           </div>     
       </div>
     </div>
-  //   <div>
-  //      <div className="food-main">
-  //   <div className="food-container">
-  //       <img src="./buger.jpg" alt="" />
-  //       <div className="descr">
-  //         <div className="food-info">
-  //         <p className="name">
-  //           {itemData.name}
-  //         </p>
-  //         <p className="price"> {itemData.price} Ksh</p>
-  //       </div>
-  //         <button onClick={()=>addToCart(itemData)}>Order Food</button>
-  //       </div>        
-  //   </div>
-    
-  //  </div>
-  //           {/* {itemData.name} - ${itemData.price}
-  //           <button onClick={() => addToCart(itemData)}>{inCart? 'inCart':'add' }</button> */}
-  //   </div>
   )
 }
 

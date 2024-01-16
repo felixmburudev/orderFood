@@ -1,12 +1,13 @@
-import React from 'react'
 import Home from './Home'
 import Menu from './Menu'
 import '../styles/mainPage.css'
+import NavBar from '../components/NavBar'
 
 function MainPage() {
   return (
     <div className='main-page'>
-      <Home/>
+    <NavBar/>
+      <Home />
       <Menu/>
       
     </div>

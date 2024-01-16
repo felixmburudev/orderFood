@@ -2,11 +2,16 @@ import { useEffect, useState } from "react";
 import { useCart } from "../context/StoreContext";
 import CartItem from '../components/CartItem'
 import '../styles/cart.css'
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 const Cart = () => {
   const { cartItems } = useCart();
+  const navigate = useNavigate();
   const [totalPrice, setTotalPrice] =useState(0)
   useEffect(()=>{
+
+    
     const calculatePrice = cartItems.reduce((totalPrice, item)=> totalPrice + item.price*item.quantity, 0)
     setTotalPrice(calculatePrice)
   },[cartItems])

@@ -5,7 +5,9 @@ const API_URL = 'http://localhost:3000/cart';
 const cartService = {
   addToCart: async (itemData) => {
     try {
-      const response = await axios.post(`${API_URL}/add`, itemData);
+      const response = await axios.post(`${API_URL}/add`, itemData,{
+        withCredentials: true
+      });
       return response.data;
     } catch (error) {
       console.error('Error adding to cart:', error);
@@ -15,10 +17,12 @@ const cartService = {
 
   updateCartItem: async (item_id, updatedQuantity) => {
     try {
-      const response = await axios.put(`${API_URL}/update`, { item_id, updatedQuantity});
+      const response = await axios.put(`${API_URL}/update`, { item_id, updatedQuantity},{
+        withCredentials: true
+      });
       return response.data;
     } catch (error) {
-      alert('Error updating cart item:' + error);
+      console.log('Error updating cart item:' , error);
       throw new Error('Failed to update cart item');
     }
   },
@@ -33,9 +37,11 @@ const cartService = {
   },
   
 
-  getUserCart: async (userId) => {
+  getUserCart: async () => {
     try {
-      const response = await axios.get(`${API_URL}/user`);
+      const response = await axios.get(`${API_URL}/user`,{
+        withCredentials: true
+      });
       return response.data;
     } catch (error) {
       console.error('Error getting user cart:', error);

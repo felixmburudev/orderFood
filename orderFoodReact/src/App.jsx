@@ -4,7 +4,7 @@ import Menu from './pages/Menu'
 import Cart from './pages/Cart'
 // import Home from './pages/Home'
 import MainPage from './pages/MainPage'
-import NavBar from './components/NavBar'
+// import NavBar from './components/NavBar'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import UserProfile from './pages/UserProfile'
@@ -14,10 +14,10 @@ function App() {
   return (
     <>
     <BrowserRouter>
-    <NavBar/>
+    {/* <NavBar/> */}
     <Routes>
-      <Route path='/' element={<MainPage/>} />
-      <Route path='/menu' element={<Menu/>}/>
+      <Route  path='/' element={<MainPage/>} />
+      <Route  path='/menu' element={<Menu/>}/>
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/login' element={<Login/>} />

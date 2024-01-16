@@ -1,7 +1,3 @@
-// Shop component - Displaying items with 'Add to Cart' button
-
-import { useCart } from "../context/StoreContext";
-import {useNavigate} from "react-router-dom"
 import Item from '../components/Item'
 import '../styles/home.css';
 import { useEffect, useState } from "react";
@@ -9,8 +5,8 @@ import axios from "axios";
 
 
 const Menu = () => {
-  const{cartItems}=useCart()
   const[items, setItems]=useState([])
+  const [isAuth, setIsAuth ] =useState(false)
 
   useEffect(()=>{
     axios.post('http://localhost:3000/items')
@@ -18,17 +14,28 @@ const Menu = () => {
       setItems(response.data)
     })
     .catch((err)=>{
-      // alert("error fetching menu "+ err)
+      console.log("error fetching menu ", err)
     })
-  })
+    //
+    const checkCookie = (cookieName) => {
+      return document.cookie.split(';').some((cookie) => {
+        return cookie.trim().startsWith(`${cookieName}=`);
+      });
+    };
+
+    // check if the cookie is present
+    const cookieNameToCheck = 'authCookie'; 
+    const cookieExists = checkCookie(cookieNameToCheck)
+    setIsAuth(cookieExists);
+  }, [])
 
   return (
-    <div  className="home-main">
+    <div id="Menu"  className="home-main">
     <div className="scroll-container">
       <div className="scroll-content">
       {items.map((item) => (
           <div className="item" key={item.item_id}>
-          <Item itemData = {item}/>
+          <Item itemData = {item} isAuth ={isAuth}/>
 
           </div>
         ))}
@@ -42,3 +49,5 @@ const Menu = () => {
 };
 
 export default Menu;
+
+
