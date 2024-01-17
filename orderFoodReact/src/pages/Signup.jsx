@@ -1,8 +1,10 @@
 import{ useState } from 'react';
 import axios from 'axios';
 import "../styles/Signup.css"
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+  const nav = useNavigate()
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -23,8 +25,9 @@ const Signup = () => {
       setPhone('');
       setPassword('');
       setError('');
+      nav("/Login")
     } catch (error) {
-      alert('Signup failed----' + error.response.message+"-----"+ error);
+      console.log('Signup failed----' , error.response.message+"-----"+ error);
       // server errors
       setError(error.response.data.message);
     }
@@ -58,8 +61,11 @@ const Signup = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+      <div className="signup-bnts">
       <button onClick={handleSignup}>Signup</button>
-      <span> <a href="/Login">Create Account</a></span>
+      <span> <a href="/Login">Login Herer</a></span>
+
+      </div>
     </div>
   );
 };

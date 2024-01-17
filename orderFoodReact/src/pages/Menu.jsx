@@ -9,7 +9,7 @@ const Menu = () => {
   const [isAuth, setIsAuth ] =useState(false)
 
   useEffect(()=>{
-    axios.post('http://localhost:3000/items')
+    axios.get('http://localhost:3000/items')
     .then((response)=>{
       setItems(response.data)
     })
@@ -24,8 +24,8 @@ const Menu = () => {
     };
 
     // check if the cookie is present
-    const cookieNameToCheck = 'authCookie'; 
-    const cookieExists = checkCookie(cookieNameToCheck)
+    const cookieName = 'authCookie'; 
+    const cookieExists = checkCookie(cookieName)
     setIsAuth(cookieExists);
   }, [])
 

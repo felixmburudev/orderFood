@@ -24,7 +24,7 @@ const Login = () => {
       setError('');
       navigate("/")
     } catch (error) {
-      alert('Login failed'+ error);
+      console.log('Login failed', error);
       setError(error.response.data.message);
     }
   };
@@ -45,8 +45,11 @@ const Login = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+      <div className="login-bnts">
       <button onClick={handleLogin}>Login</button>
       <span> <a href="/Signup">Create Account</a></span>
+
+      </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import '../styles/food.css'
 import { useNavigate } from 'react-router-dom';
 
 const Item = ({itemData, isAuth}) => {
-    const { addToCart, cartItems } = useCart();
+    const { addToCart} = useCart();
     const navigate =useNavigate()
     
     const {image, ...itemToCart} = itemData
