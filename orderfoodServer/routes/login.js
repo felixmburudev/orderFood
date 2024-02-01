@@ -20,7 +20,7 @@ router.post('/login', (req, res) => {
   
         // Set a cookie
         const userEmail = results[0].email
-        res.cookie('authCookie', userEmail, { httpOnly: true })
+        res.cookie('authCookie', userEmail, )
         res.json({ message: 'Login successful' })
       }
     )

@@ -40,29 +40,29 @@ const UserProfile = () => {
   };
 
   return (
+    <div className="container">
+    <nav className="navbar">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Cart</a></li>
+      </ul>
+    </nav>
+    <div className="button-row">
+      <button className="button">Order History</button>
+      <button className="button">My Orders</button>
+      <button className="button">Starred Items</button>
+    </div>
     <div className="user-profile-container">
       <h2>User Profile</h2>
       {userInfo && (
         <div className="user-info">
-          <p>Name: {userInfo.name}</p>
-          <p>Email: {userInfo.email}</p>
-          <button onClick={handleLogout}>Logout </button>
+          <p><strong>Name:</strong> {userInfo.name}</p>
+          <p><strong>Email:</strong> {userInfo.email}</p>
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
         </div>
       )}
-      {/* {orderHistory.length > 0 && (
-        <div className="order-history">
-          <h3>Order History</h3>
-          <ul>
-            {orderHistory.map((order) => (
-              <li key={order.orderId}>
-                <p>Order ID: {order.orderId}</p>
-                <p>Total Amount: ${order.totalAmount}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )} */}
     </div>
+  </div>
   );
 };
 

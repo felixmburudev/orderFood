@@ -71,11 +71,10 @@ const openCart = ()=>{
 		
 		<div className="navbtn">
       <a  onClick={openCart}>{<FiShoppingCart/> } {cartItems.length }</a>
-        </div>
-                
-                <button className="nav-btn" onClick={showNavbar}>
-                    <FaBars/>
-                </button>
+        </div>                
+     <button className="nav-btn" onClick={showNavbar}>
+        <FaBars/>
+      </button>
             
         </header>
         </>

@@ -1,34 +1,78 @@
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar li {
+  margin-left: 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #555;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #555;
+}
+
 .user-profile-container {
-    position: relative;
-    top: 90px;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .user-info {
-    margin-bottom: 20px;
-  }
-  
-  .order-history {
-    border-top: 1px solid #ccc;
-    padding-top: 20px;
-  }
-  
-  .order-history h3 {
-    margin-bottom: 10px;
-  }
-  
-  .order-history ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .order-history li {
-    margin-bottom: 15px;
-  }
-  
+  margin-top: 40px;
+}
+
+.user-info {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.user-info p {
+  margin-bottom: 10px;
+}
+
+.logout-button {
+  padding: 8px 20px;
+  font-size: 16px;
+  background-color: #c0392b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #a93226;
+}
