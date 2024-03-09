@@ -1,9 +1,18 @@
-.cart-container{
+
+.cart {
+    width: 100vw;
+    margin: 0 auto;
+  }
+  .cart-container{
+    padding-top: 90px;
     display: flex;
     flex-direction: column;
     align-items: center;
     
 }
+
+
+  
 .priceTotal{
     display: flex;
     flex-direction: column;

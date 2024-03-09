@@ -1,6 +1,36 @@
-.about-container{
-    position: relative;
-    top: 50px;
-    background-color: blueviolet;
-    height: 100vh;
-}
+.about-container {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .about-heading {
+    font-size: 2.5em;
+  }
+  
+  .location-heading {
+    font-size: 1.8em;
+    margin-top: 30px;
+  }
+  
+  .location-list,
+  .contact-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .location-item,
+  .contact-item {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .contact-details {
+    margin-top: 20px;
+  }
+  
+  .contact-heading {
+    font-size: 1.8em;
+  }
+  

@@ -4,6 +4,7 @@ import CartItem from '../components/CartItem'
 import '../styles/cart.css'
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import Navbar from "../components/NavBar"
 
 const Cart = () => {
   const { cartItems } = useCart();
@@ -16,6 +17,8 @@ const Cart = () => {
     setTotalPrice(calculatePrice)
   },[cartItems])
   return (
+    <div className="cart">
+      <Navbar/>
     <div id="Cart" className="cart-container">
       <h2>Cart {cartItems.length}</h2>
       <ul>
@@ -30,14 +33,7 @@ const Cart = () => {
         <h3>Total Price: {totalPrice} ksh </h3> 
         <button>CheckOut</button>
       </div>
-      {/* <div className="map">dsdv
-        {cartItems.map((odj, index)=>(
-          <div key={index} className="key">
-            {JSON.stringify(odj)}
-            {odj.quantity}
-          </div>
-        ))}
-      </div> */}
+    </div>
     </div>
   );
 };

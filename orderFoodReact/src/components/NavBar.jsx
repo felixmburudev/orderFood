@@ -1,6 +1,7 @@
 import {FaBars , FaTimes } from "react-icons/fa";
 import { useRef } from "react";
 import { Link } from "react-scroll";
+import { useLocation } from 'react-router-dom';
 
 import '../styles/navbar.css'
 import {FiShoppingCart, FiUser} from 'react-icons/fi'
@@ -10,6 +11,10 @@ import { useCart } from '../context/StoreContext'
 function NavBar(){
   const navigate = useNavigate()
     const{cartItems}= useCart()
+
+    const location = useLocation();
+
+    const isActivePage = location.pathname === '/';
 
     const navRef = useRef(null);
      const showNavbar = () =>{
@@ -35,8 +40,10 @@ const openCart = ()=>{
       <>
         <header>
             <h2>burger shop</h2>
-            <nav ref={navRef}>
+            
+      {isActivePage ?  <nav ref={navRef}>
                 <Link to="Home"
+                href="/contact"
                 activeClass="active"
                 spy={true}
                 smooth={true}
@@ -51,7 +58,7 @@ const openCart = ()=>{
                 duration={ 500}onClick={showNavbar}>Menu</Link>
                 <Link 
                 activeClass="active"
-                to="/About"
+                to="About"
                 spy={true}
                 smooth={true}
                 offset={-80}
@@ -64,17 +71,28 @@ const openCart = ()=>{
                 offset={-80}
                 duration={700} onClick={showNavbar}>Contact Us</Link>
                <a href="/Profile" onClick={showNavbar}><FiUser/></a>
-                <button className="nav-btn nav-close-btn" onClick={showNavbar}>
-                    <FaTimes/>
-                </button>
-                </nav>
+                {/* <button> */}
+                    <FaTimes className="nav-btn nav-close-btn"   onClick={showNavbar}/>
+                {/* </button> */}
+                </nav>:
+                <nav  ref={navRef}>
+                <a href="/" className="active" onClick={showNavbar}>Home</a>
+                <a href="/Menu" onClick={showNavbar}>Menu</a>
+                <a href="/About" onClick={showNavbar}>About</a>
+                <a href="/Contact" onClick={showNavbar}>Contact Us</a>
+                <a href="/Profile" onClick={showNavbar}><FiUser/></a>
+                <FaTimes className="nav-btn nav-close-btn" onClick={showNavbar}/>
+              </nav>
+              
+                }
+            
 		
 		<div className="navbtn">
-      <a  onClick={openCart}>{<FiShoppingCart/> } {cartItems.length }</a>
+      <a  onClick={openCart}>{<FiShoppingCart/> }   :&nbsp;{cartItems.length }</a>
         </div>                
-     <button className="nav-btn" onClick={showNavbar}>
-        <FaBars/>
-      </button>
+     {/* <button> */}
+        <FaBars  className="nav-btn" onClick={showNavbar}/>
+      {/* </button> */}
             
         </header>
         </>

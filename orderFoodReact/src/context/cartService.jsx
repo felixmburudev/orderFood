@@ -28,10 +28,12 @@ const cartService = {
   },
   deleteCartItem: async(item_id)=>{
     try {
-      const response = await axios.put(`${API_URL}/delete`, {item_id})
+      const response = await axios.put(`${API_URL}/delete`, {item_id},{
+        withCredentials: true
+      });
       return response.data
     } catch (error) {
-      alert("failed to delete from the server " + error)
+      console.log("failed to delete from the server " + error)
       
     }
   },

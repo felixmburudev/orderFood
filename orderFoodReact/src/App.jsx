@@ -8,6 +8,8 @@ import MainPage from './pages/MainPage'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import UserProfile from './pages/UserProfile'
+import ContactForm from './pages/Contact'
+import About from './pages/About'
 
 function App() {
 
@@ -20,7 +22,9 @@ function App() {
       <Route  path='/menu' element={<Menu/>}/>
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/signup' element={<Signup/>}/>
+      <Route path='/contact' element={<ContactForm/>}/>
       <Route path='/login' element={<Login/>} />
+      <Route path='/about' element={<About/>}/>
       <Route path='/Profile' element={<UserProfile/>} />
     </Routes>
     </BrowserRouter>

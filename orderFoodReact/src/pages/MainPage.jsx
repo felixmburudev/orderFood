@@ -2,6 +2,8 @@ import Home from './Home'
 import Menu from './Menu'
 import '../styles/mainPage.css'
 import NavBar from '../components/NavBar'
+import ContactForm from './Contact'
+import About from './About'
 
 function MainPage() {
   return (
@@ -9,6 +11,8 @@ function MainPage() {
     <NavBar/>
       <Home />
       <Menu/>
+      <About/>
+      {/* <ContactForm/> */}
       
     </div>
   )
