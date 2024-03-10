@@ -2,12 +2,16 @@ import Item from '../components/Item'
 import '../styles/home.css';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useLocation } from 'react-router-dom';
+import NavBar from '../components/NavBar';
+import Footer from './Footer';
 
 
 const Menu = () => {
   const[items, setItems]=useState([])
   const [isAuth, setIsAuth ] =useState(false)
-
+  const location = useLocation()
+  const isActive = location.pathname ==="/"
   useEffect(()=>{
     axios.get('http://localhost:3000/items')
     .then((response)=>{
@@ -31,6 +35,7 @@ const Menu = () => {
 
   return (
     <div id="Menu"  className="home-main">
+     {!isActive && <NavBar />}
     <div className="scroll-container">
       <div className="scroll-content">
       {items.map((item) => (
@@ -42,6 +47,8 @@ const Menu = () => {
 </div>
     </div>
     {/* {JSON.stringify(items)} */}
+    {!isActive && <Footer />}
+
     </div>
 
 

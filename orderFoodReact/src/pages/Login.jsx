@@ -2,6 +2,10 @@ import{ useState } from 'react';
 import axios from 'axios';
 import "../styles/Login.css"
 import {useNavigate} from 'react-router-dom'
+import NavBar from '../components/NavBar';
+import Footer from './Footer';
+import { useLocation } from 'react-router-dom';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -9,6 +13,9 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate()
 
+  const location = useLocation()
+  const isActive = location.pathname ==="/"
+  
 
   const handleLogin = async () => {
     try {
@@ -30,7 +37,11 @@ const Login = () => {
   };
 
   return (
+    <div className="login">
+      
+     {!isActive && <NavBar />}
     <div id="Login" className="login-container">
+      
       <h2>Login</h2>
       {error && <div className="error">{error}</div>}
       <input
@@ -50,6 +61,9 @@ const Login = () => {
       <span> <a href="/Signup">Create Account</a></span>
 
       </div>
+      
+    </div>
+    {!isActive && <Footer />}
     </div>
   );
 };

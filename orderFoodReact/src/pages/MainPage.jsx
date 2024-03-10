@@ -4,6 +4,7 @@ import '../styles/mainPage.css'
 import NavBar from '../components/NavBar'
 import ContactForm from './Contact'
 import About from './About'
+import Footer from './Footer'
 
 function MainPage() {
   return (
@@ -12,7 +13,8 @@ function MainPage() {
       <Home />
       <Menu/>
       <About/>
-      {/* <ContactForm/> */}
+      <ContactForm/>
+      <Footer/>
       
     </div>
   )

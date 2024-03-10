@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/UserProfile.css';
 import { useNavigate } from 'react-router-dom';
+import Footer from './Footer';
+import Navbar from '../components/NavBar'
 
 const UserProfile = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -40,13 +42,9 @@ const UserProfile = () => {
   };
 
   return (
+  <div className="account-container">
     <div className="container">
-    <nav className="navbar">
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Cart</a></li>
-      </ul>
-    </nav>
+    <Navbar/>
     <div className="button-row">
       <button className="button">Order History</button>
       <button className="button">My Orders</button>
@@ -62,6 +60,9 @@ const UserProfile = () => {
         </div>
       )}
     </div>
+  </div>
+  
+  <Footer/>
   </div>
   );
 };

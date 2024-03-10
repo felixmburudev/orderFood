@@ -2,8 +2,16 @@ import  { useState } from 'react';
 import axios from 'axios';
 import "../styles/contact.css"
 import NavBar from '../components/NavBar';
+import Footer from './Footer';
+import { useLocation } from 'react-router-dom';
+
 
 const ContactForm = () => {
+  
+  const location = useLocation()
+  const isActive = location.pathname ==="/"
+  
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,7 +35,8 @@ const ContactForm = () => {
 
   return (
     <div className="contact-container">
-        <NavBar/>
+        
+     {!isActive && <NavBar />}
         <div className="contact-form">
       <h2>Contact Us</h2>
       <form onSubmit={handleSubmit}>
@@ -57,6 +66,7 @@ const ContactForm = () => {
         <button type="submit">Send Message</button>
       </form>
     </div>
+    {!isActive && <Footer/>}
     </div>
    
   );
