@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useCart } from "../context/StoreContext";
 import CartItem from '../components/CartItem'
 import '../styles/cart.css'
-import { useNavigate } from 'react-router-dom';
-import axios from "axios";
+// import { useNavigate } from 'react-router-dom';
+// import axios from "axios";
 import Navbar from "../components/NavBar"
 
 const Cart = () => {
   const { cartItems } = useCart();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [totalPrice, setTotalPrice] =useState(0)
   useEffect(()=>{
 

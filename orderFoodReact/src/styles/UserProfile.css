@@ -1,24 +1,29 @@
 .account-container { 
-  
+  width: 100vw;
+  height: 100vh;
 }
   
 
 .container {
   padding-top: 90px;
+  flex: 1;
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  height: 60%;
+  /* padding: 20px; */
 }
 
 .button-row {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  justify-content: space-evenly;
 }
 
 .button {
   padding: 10px 20px;
   font-size: 16px;
+  width: 25%;
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -30,8 +35,14 @@
   background-color: #f9f9f9;
   padding: 20px;
   border-radius: 5px;
+  margin-top: 20px; /* Add margin-top to create space between buttons and user profile */
 }
-
+.footer-sec {
+  margin-top: auto; 
+  bottom: 0;
+  position: absolute; 
+  width: 100%;
+}
 .user-profile-container h2 {
   margin-bottom: 10px;
 }
@@ -53,12 +64,4 @@
 .logout-button:hover {
   background-color: #c82333;
 }
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #f8f9fa;
-  padding: 20px 0;
-  text-align: center;
-}
+
