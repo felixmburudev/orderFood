@@ -35,12 +35,12 @@
   background-color: #f9f9f9;
   padding: 20px;
   border-radius: 5px;
-  margin-top: 20px; /* Add margin-top to create space between buttons and user profile */
+  margin-top: 20px; 
 }
 .footer-sec {
   margin-top: auto; 
   bottom: 0;
-  position: absolute; 
+  /* position: absolute;  */
   width: 100%;
 }
 .user-profile-container h2 {
@@ -63,5 +63,41 @@
 
 .logout-button:hover {
   background-color: #c82333;
+}
+.order-history {
+  margin-top: 20px;
+}
+
+.order-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.order-item p:first-child {
+  font-weight: bold;
+}
+
+.order-item p:nth-child(2) {
+  margin-top: 5px;
+}
+.order-item p:nth-child(3) {
+  margin-top: 5px;
+}
+
+.order-item .check-icon,
+.order-item .cross-icon {
+  margin-right: 5px;
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.order-item .check-icon {
+  color: green;
+}
+
+.order-item .cross-icon {
+  color: red;
 }
 

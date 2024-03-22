@@ -14,6 +14,8 @@ const updateCart= require('./routes/updateCart')
 const deleteCartItem = require('./routes/deleteCartItem')
 const userProfile = require('./routes/userProfile')
 const orderHistory = require('./routes/orders')
+const createTables = require('./models/tableCreator')
+const checkOut = require('./routes/checkOut')
 const app = express()
 app.use(cors({
     origin: 'http://localhost:5173', 
@@ -40,8 +42,9 @@ app.put('/cart/delete', checkAuth, deleteCartItem)
 app.post('/image', getCartImg);  
 app.get('/user-profile', checkAuth, userProfile); 
 app.post('/logout', checkAuth, logout);
-app.get('/orderHistory', checkAuth, orderHistory);
-
+app.get('/userOrders', checkAuth, orderHistory);
+app.post('/checkOut', checkAuth, checkOut);
+createTables();
 
 app.listen(3000, () =>{
     console.log('app running')

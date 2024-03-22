@@ -4,6 +4,7 @@ import '../styles/UserProfile.css';
 import {  useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 import Navbar from '../components/NavBar'
+import { FaCheck, FaTimes } from 'react-icons/fa';
 
 const UserProfile = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -33,8 +34,10 @@ const UserProfile = () => {
           withCredentials: true, 
         });
       
+        // alert(JSON.stringify(response));
         setOrderHistory(response.data.orderHistory);
       } catch (error) {
+        alert("Error: " + error)
         console.error('Error fetching user orders', error);
       }
     };
@@ -80,12 +83,9 @@ const UserProfile = () => {
         <div className="order-history">
           {orderHistory.map((order, index) => (
             <div key={index} className="order-item">
-              <p>{order.time}</p>
-              <p><strong>Price:</strong> {order.price} ksh</p>
-              <label>
-                Delivered?{' '}
-                <input type="checkbox" checked={order.delivered} readOnly />
-              </label>
+              <p> Order Date: {order.order_date}</p>
+              <p><strong>Price:</strong> {order.order_cost} ksh</p>             
+              <p> Order Derivered?  {order.order_derivered? <FaCheck/> : <FaTimes/>}</p>              
             </div>
           ))}
         </div>
