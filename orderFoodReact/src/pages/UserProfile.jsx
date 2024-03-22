@@ -73,8 +73,7 @@ const UserProfile = () => {
             <div className="user-info">
               <p><strong>Name:</strong> {userInfo.name}</p>
               <p><strong>Email:</strong> {userInfo.email}</p>
-              <button className="logout-button" onClick={handleLogout}>Logout</button>
-            </div>
+             </div>
           )}
         </div>
         <div className="my-orders">
@@ -91,6 +90,8 @@ const UserProfile = () => {
         </div>
       )}
       </div>
+      <button className="logout-button" onClick={handleLogout}>Logout</button>
+            
       <div className="footer-sec">
       <Footer/>
       </div>
